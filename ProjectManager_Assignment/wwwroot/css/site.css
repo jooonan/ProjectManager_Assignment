@@ -1,31 +1,108 @@
-html {
-  font-size: 14px;
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+    --font: "Nunito", sans-serif;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+    --font-black: 900;
+    --color-text: #637085;
+    --color-accent: #2D99FF;
+    --color-heading: #1a1926;
+    --color-body-dark: #28263B;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+html, body {
+    background-color: #F1F3F7;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: var(--font-regular);
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Links */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: var(--font-semibold);
 }
 
-body {
-  margin-bottom: 60px;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+h1 {
+    font-size: 2.25rem;
+    font-weight: var(--font-bold);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+h2 {
+    font-size: 2rem;
+    font-weight: var(--font-bold);
+}
+
+h3 {
+    font-size: 1.75rem;
+    font-weight: var(--font-bold);
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: var(--font-semibold);
+}
+
+h5 {
+    font-size: 1.25rem;
+    font-weight: var(--font-semibold);
+}
+
+h6 {
+    font-size: 1.125rem;
+    font-weight: var(--font-semibold);
+}
+
+/* Paragraphs and Span */
+p, span {
+    color: var(--color-text);
+}
+
+/* Buttons */
+.btn {
+    padding: 1rem 1.5rem;
+    margin-top: 0.5rem;
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 0.875rem;
+    font-size: 1rem;
+    font-weight: var(--font-semibold);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn:hover {
+        background: #066ac7;
+        color: white;
+    }
+
+/* Input Placeholders */
+input::placeholder, textarea::placeholder {
+    color: var(--color-text);
+    opacity: 1;
+}
+
+/*  Global Active Style  */
+.active {
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
 }

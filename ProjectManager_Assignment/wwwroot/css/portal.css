@@ -1,0 +1,408 @@
+﻿/* Portal Page Styles */
+:root {
+    --color-border-line: #e3e5e8;
+    --color-bg-active: #1a8eff1a;
+    --color-accent: #2D99FF;
+    --color-body-dark: #28263B;
+    --color-red: #ff6640;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "side top"
+        "side main";
+    font-weight: 600;
+    height: 100dvh;
+}
+
+.sidebar {
+    grid-area: side;
+    width: 16.875rem;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--color-border-line);
+}
+
+    .sidebar .logo {
+        margin-bottom: 2rem;
+    }
+
+.nav-links a {
+    display: block;
+    text-decoration: none;
+    border-bottom: transparent;
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+    .nav-links a.active {
+        background-color: var(--color-bg-active);
+    }
+
+.top-bar {
+    grid-area: top;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0.8rem;
+    padding: 1.5rem 2rem;
+}
+
+/* Settings Icon */
+.settings-icon {
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+    .settings-icon img {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .settings-icon:hover {
+        opacity: 0.7;
+    }
+
+/* Settings Popup */
+.settings-popup {
+    position: absolute;
+    top: 3.5rem;
+    right: 6rem;
+    background-color: #ffffff;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+    z-index: 100;
+    width: 19rem;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    span {
+        color: #1A1926;
+    }
+
+}
+
+.settings-popup.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.settings-popup .user {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background-color: #F1F3F7;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    color: #1A1926;
+}
+
+    .settings-popup .user img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.settings-popup .logout-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    padding: 1rem;
+    text-align: left;
+    transition: background-color 0.2s ease;
+    border-radius: 0.5rem;
+}
+
+    .settings-popup .logout-btn:hover {
+        background-color: var(--color-bg-active);
+    }
+
+.avatar {
+    border: none;
+    padding-left: 1rem;
+    border-left: 1px solid var(--color-border-line);
+}
+
+.main-content {
+    grid-area: main;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--color-border-line);
+    padding: 2rem;
+}
+
+.add-project-btn {
+    right: 1.2rem;
+    top: 1.2rem;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+/* Center and adjust modal size */
+.modal-dialog {
+    max-width: 31.25rem;
+}
+
+.modal-content {
+    padding: 1.2rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.2rem 0.95rem rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 1.75rem;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal-project-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    img {
+        width: 7rem;
+    }
+
+}
+
+.form-control {
+    border-radius: 0.8rem;
+}
+
+.project-date {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Input with Icon */
+.budget-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+    .budget-box i {
+        position: absolute;
+        left: 0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #637085;
+        font-size: 1rem;
+    }
+
+    .budget-box input {
+        width: 100%;
+        padding: .375rem .375rem .375rem 2rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 0.8rem;
+        color: #1A1926;
+        font-size: 0.9rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+        .budget-box input:focus {
+            border-color: #66afe9;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+    .btn {
+        width: 100%;
+        border-radius: 0.8rem;
+    }
+
+}
+
+.projects-section {
+    padding: 0rem 2rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--color-border-line);
+}
+
+    .tabs a {
+        text-decoration: none;
+        padding-bottom: 0.3rem;
+        transition: color 0.2s ease-in-out;
+        font-weight: 700;
+    }
+
+
+.projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+}
+
+
+
+/* Project Card */
+.project-card {
+    background-color: #ffffff;
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    border-radius: 0.8rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    height: 13rem;
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+    .project-card:hover {
+        transform: translateY(-3px);
+        border-color: #66afe9;
+        box-shadow: 0 1.1rem 0.4rem -0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    img {
+        width: 3.5rem;
+    }
+}
+
+.project-client-box {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-client-text {
+    display: grid;
+}
+
+.project-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-heading);
+}
+
+/* Options Button */
+.options-wrapper {
+    position: relative;
+}
+
+.options-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+    .options-btn i {
+        color: var(--color-text);
+        font-size: 1.1rem;
+    }
+
+/* Dropdown Menu */
+.options-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 0.8rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease-in-out;
+    width: 12rem;
+    z-index: 10;
+}
+
+    .options-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .options-menu button {
+        background-color: #ffffff;
+        padding: 0.8rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: left;
+        border-radius: 1rem;
+        padding: 1rem;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-text);
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .options-menu button:hover {
+            background-color: #f1f3f7;
+        }
+
+    .options-menu .delete-btn {
+        span {
+            color: var(--color-red);
+        }
+
+}
+
+.options-line {
+    height: 1px;
+    background-color: var(--color-border-line);
+    margin: 0.2rem 0rem;
+}
+
+
+/* Card Body */
+.card-body {
+    font-size: 0.95rem;
+}
+
+.client-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #637085;
+}
+
+.project-description {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-body-dark);
+}
+
+
+#startDate, #endDate {
+    width: 12.86rem;
+}

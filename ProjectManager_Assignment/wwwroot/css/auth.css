@@ -1,0 +1,66 @@
+﻿body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100svh;
+}
+
+.container {
+    background: #fff;
+    padding: 5rem 4rem 1rem 4rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 37.5rem;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 2rem;
+}
+
+a {
+    color: var(--color-accent);
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+    .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 0.9rem;
+        font-size: 14px;
+    }
+
+.terms {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+    .terms input {
+        margin-right: 8px;
+    }
+
+.btn-login-register {
+    width: 100%;
+}
+
+.login-link {
+    margin-top: 8rem;
+    font-size: 0.9rem;
+    color: var(--color-body-dark);
+}
