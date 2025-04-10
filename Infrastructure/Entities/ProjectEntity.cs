@@ -9,7 +9,7 @@ public class ProjectEntity
     public string ProjectId { get; set; } = null!;
 
     [Required]
-    public string Name { get; set; } = null!;
+    public string ProjectName { get; set; } = null!;
 
     public string? Description { get; set; }
 
