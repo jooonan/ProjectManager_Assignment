@@ -8,7 +8,7 @@
 .container {
     background: #fff;
     padding: 5rem 4rem 1rem 4rem;
-    border-radius: 10px;
+    border-radius: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     width: 37.5rem;
     text-align: center;
@@ -30,17 +30,29 @@ a {
     .form-group label {
         display: block;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: var(--font-semibold);
         margin-bottom: 5px;
     }
 
     .form-group input {
         width: 100%;
-        padding: 10px;
+        padding: 1rem;
         border: 1px solid #ddd;
         border-radius: 0.9rem;
         font-size: 14px;
     }
+
+form .field-validation-error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+form .input-validation-error {
+    border: 1px solid #FF0000;
+}
+
 
 .terms {
     display: flex;
@@ -55,12 +67,37 @@ a {
         margin-right: 8px;
     }
 
+    .terms a {
+        margin-right: 0.5rem;
+    }
+
 .btn-login-register {
     width: 100%;
+    font-weight: var(--font-semibold);
+    font-family: var(--font);
 }
 
 .login-link {
     margin-top: 8rem;
     font-size: 0.9rem;
+    font-weight: var(--font-semibold);
     color: var(--color-body-dark);
+}
+
+.validation-summary {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+    .validation-summary ul {
+        padding-left: 20px;
+        margin: 5px 0;
+    }
+
+.text-danger {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
 }

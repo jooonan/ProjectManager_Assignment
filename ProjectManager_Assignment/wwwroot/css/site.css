@@ -1,4 +1,3 @@
-/* Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 :root {
@@ -13,6 +12,7 @@
     --color-accent: #2D99FF;
     --color-heading: #1a1926;
     --color-body-dark: #28263B;
+    --color-grey-100: #F1F3F7;
 }
 
 * {
@@ -71,7 +71,6 @@ h6 {
     font-weight: var(--font-semibold);
 }
 
-/* Paragraphs and Span */
 p, span {
     color: var(--color-text);
 }
@@ -95,7 +94,7 @@ p, span {
         color: white;
     }
 
-/* Input Placeholders */
+
 input::placeholder, textarea::placeholder {
     color: var(--color-text);
     opacity: 1;
@@ -105,4 +104,8 @@ input::placeholder, textarea::placeholder {
 .active {
     color: var(--color-accent);
     border-bottom: 2px solid var(--color-accent);
+
+    span {
+        color: var(--color-accent);
+    }
 }
