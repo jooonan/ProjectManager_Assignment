@@ -28,6 +28,6 @@ public class ProjectEntity
 
     [Required]
     [ForeignKey(nameof(User))]
-    public string UserId { get; set; } = null!;  // Changed from int to string
+    public string UserId { get; set; } = null!;
     public UserEntity User { get; set; } = null!;
 }

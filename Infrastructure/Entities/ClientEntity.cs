@@ -10,6 +10,5 @@ public class ClientEntity
     [Required]
     public string ClientName { get; set; } = null!;
 
-    // Navigation property
-    public ICollection<ProjectEntity> Projects { get; set; } = new List<ProjectEntity>();
+    public ICollection<ProjectEntity> Projects { get; set; } = [];
 }

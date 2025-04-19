@@ -1,5 +1,4 @@
-﻿/* Portal Page Styles */
-:root {
+﻿:root {
     --color-border-line: #e3e5e8;
     --color-bg-active: #1a8eff1a;
     --color-accent: #2D99FF;
@@ -52,27 +51,33 @@
     padding: 1.5rem 2rem;
 }
 
-/* Settings Icon */
 .settings-icon {
     border: none;
     cursor: pointer;
     transition: opacity 0.2s ease;
+    padding-right: 0.4rem;
 }
-
-    .settings-icon img {
-        width: 2rem;
-        height: 2rem;
-    }
 
     .settings-icon:hover {
         opacity: 0.7;
     }
 
+.avatar {
+    border: none;
+    padding-left: 1.5rem;
+    cursor: pointer;
+    border-left: 1px solid var(--color-border-line);
+}
+
+.user-info-avatar {
+    border: 2px solid #fff;
+}
+
 /* Settings Popup */
 .settings-popup {
     position: absolute;
     top: 3.5rem;
-    right: 6rem;
+    right: 8rem;
     background-color: #ffffff;
     padding: 0.7rem;
     border-radius: 0.5rem;
@@ -85,7 +90,6 @@
     span {
         color: #1A1926;
     }
-
 }
 
 .settings-popup.show {
@@ -100,7 +104,7 @@
     gap: 0.7rem;
     background-color: #F1F3F7;
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 0.6rem;
     margin-bottom: 0.5rem;
     color: #1A1926;
 }
@@ -131,10 +135,16 @@
         background-color: var(--color-bg-active);
     }
 
-.avatar {
+.btn-link {
     border: none;
-    padding-left: 1rem;
-    border-left: 1px solid var(--color-border-line);
+    background: none;
+    padding: 0;
+    text-decoration: none;
+    color: #28263B;
+}
+
+.fa-arrow-right-from-bracket {
+    margin-right: 0.7rem;
 }
 
 .main-content {
@@ -156,7 +166,7 @@
     transition: background-color 0.2s ease;
 }
 
-/* Center and adjust modal size */
+/* Modal */
 .modal-dialog {
     max-width: 31.25rem;
 }
@@ -184,7 +194,6 @@
     img {
         width: 7rem;
     }
-
 }
 
 .form-control {
@@ -197,48 +206,59 @@
     width: 100%;
 }
 
-/* Input with Icon */
 .budget-box {
     position: relative;
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 0.8rem;
 }
 
-    .budget-box i {
-        position: absolute;
-        left: 0.8rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #637085;
-        font-size: 1rem;
+.text-danger {
+    display: block;
+    margin-top: 0.25rem;
+}
+
+.budget-box i {
+    margin-left: 0.9rem;
+    margin-top: 0.525rem;
+    color: #637085;
+    font-size: 1rem;
+}
+
+.budget-box input {
+    width: 100%;
+    padding: .375rem .375rem .375rem 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.8rem;
+    color: #1A1926;
+    font-size: 0.9rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+    .budget-box input:focus {
+        border-color: #66afe9;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     }
 
-    .budget-box input {
-        width: 100%;
-        padding: .375rem .375rem .375rem 2rem;
-        border: 1px solid #e0e0e0;
-        border-radius: 0.8rem;
-        color: #1A1926;
-        font-size: 0.9rem;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    }
-
-        .budget-box input:focus {
-            border-color: #66afe9;
-            outline: 0;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-        }
+.dollar-icon {
+    position: absolute;
+    left: 0.1rem;
+    z-index: 5;
+    color: #637085;
+    pointer-events: none;
+}
 
 .modal-footer {
     border-top: none;
     justify-content: center;
+
     .btn {
         width: 100%;
         border-radius: 0.8rem;
     }
-
 }
 
+/* Projects */
 .projects-section {
     padding: 0rem 2rem;
 }
@@ -262,9 +282,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 2rem;
+    border-radius: 0.9rem;
+    max-height: 72dvh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
-
-
 
 /* Project Card */
 .project-card {
@@ -319,35 +341,36 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 1rem;
+    margin-right: 1rem;
 }
+
+    .options-btn :hover {
+        background-color: var(--color-grey-100);
+    }
 
     .options-btn i {
         color: var(--color-text);
         font-size: 1.1rem;
+        padding: 0.9rem 1rem;
+        border-radius: 0.9rem;
+        transition: background-color 0.2s ease-in-out;
     }
 
 /* Dropdown Menu */
 .options-menu {
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: 110%;
+    right: 1rem;
     background-color: #ffffff;
     border-radius: 0.8rem;
     padding: 0.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.15);
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY(-0.5rem);
     transition: opacity 0.2s ease, transform 0.2s ease-in-out;
     width: 12rem;
     z-index: 10;
 }
-
-    .options-menu.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
 
     .options-menu button {
         background-color: #ffffff;
@@ -367,15 +390,35 @@
         transition: background-color 0.2s ease-in-out;
     }
 
-        .options-menu button:hover {
+    .options-menu a {
+        background-color: #ffffff;
+        padding: 0.8rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: left;
+        border-radius: 1rem;
+        padding: 1rem;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-text);
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        &:hover {
             background-color: #f1f3f7;
         }
+}
 
-    .options-menu .delete-btn {
-        span {
-            color: var(--color-red);
-        }
+.options-menu button:hover {
+    background-color: #f1f3f7;
+}
 
+.options-menu .delete-btn {
+    span {
+        color: var(--color-red);
+    }
 }
 
 .options-line {
@@ -402,6 +445,16 @@
     color: var(--color-body-dark);
 }
 
+form .field-validation-error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+form .input-validation-error {
+    border: 1px solid #FF0000;
+}
 
 #startDate, #endDate {
     width: 12.86rem;

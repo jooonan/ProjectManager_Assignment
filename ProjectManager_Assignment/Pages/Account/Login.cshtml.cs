@@ -14,7 +14,7 @@ public class LoginModel(SignInManager<UserEntity> signInManager) : PageModel
     [BindProperty]
     public LoginFormModel LoginForm { get; set; } = new();
 
-    public string ReturnUrl { get; set; } = "/Projects/Index";
+    public string ReturnUrl { get; set; } = "/Project/Index";
 
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {

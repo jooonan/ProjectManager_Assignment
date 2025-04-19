@@ -1,122 +1,148 @@
 ﻿@page
 @model ProjectManager_Assignment.Pages.Project.IndexModel
 @{
+    ViewData["Title"] = "Projects";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="/css/portal.css">
-    <title>Alpha</title>
-</head>
-<body>
-    <div class="wrapper">
-        <section class="sidebar">
-            <a class="logo" href="#"><img src="images/alpha-logo.svg" alt=""></a>
+<div class="header">
+    <h2>Projects</h2>
+    <button type="button" class="add-project-btn btn" data-bs-toggle="modal" data-bs-target="#projectModal">
+        + Add Project
+    </button>
+</div>
 
-            <nav class="nav-links">
-                <a class="active" href="#"><span>Projects</span></a>
-            </nav>
-        </section>
+<section class="projects-section">
+    <div class="tabs">
+        <a class="@(Model.CurrentTab == "all" ? "active" : "")" asp-page="/Project/Index" asp-route-tab="all">
+            ALL (@Model.AllCount)
+        </a>
+        <a class="@(Model.CurrentTab == "started" ? "active" : "")" asp-page="/Project/Index" asp-route-tab="started">
+            STARTED (@Model.StartedCount)
+        </a>
+        <a class="@(Model.CurrentTab == "completed" ? "active" : "")" asp-page="/Project/Index" asp-route-tab="completed">
+            COMPLETED (@Model.CompletedCount)
+        </a>
+    </div>
 
-        <section class="top-bar">
-            <button type="button" class="settings-icon" id="settingsTrigger">
-                <img src="images/settings.svg" alt="Settings">
-            </button>
-
-            <div class="settings-popup" id="settingsPopup">
-                <div class="user">
-                    <i class="fa-solid fa-user-tie"></i>
-                    <span>Johan An</span>
-                </div>
-                <button class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i><span>Logout</span>
-                </button>
-            </div>
-
-
-            <button class="avatar">
-                <i class="fa-solid fa-user-tie"></i>
-            </button>
-        </section>
-
-        <section class="main-content">
-            <div class="header">
-                <h2>Projects</h2>
-
-                <button type="button" class="add-project-btn btn" data-bs-toggle="modal" data-bs-target="#addProjectModal">
-                    + Add Project
-                </button>
-                <div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="modal-title" id="addProjectModalLabel">Add Project</h2>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="modal-project-logo">
-                                    <img src="images/project-logo.svg" alt="Project Logo">
-                                </div>
-                                <!-- Form for adding a project -->
-                                <form>
-                                    <div class="mb-4">
-                                        <label for="projectName" class="form-label">Project Name</label>
-                                        <input type="text" class="form-control" id="projectName" placeholder="Project name" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="clientName" class="form-label">Client Name</label>
-                                        <input type="text" class="form-control" id="clientName" placeholder="Client name" required>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="description" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" rows="3" placeholder="Enter project description" required></textarea>
-                                    </div>
-                                    <div class="project-date">
-                                        <div class="mb-4">
-                                            <label for="startDate" class="form-label">Start Date</label>
-                                            <input type="date" class="form-control" id="startDate" required>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label for="endDate" class="form-label">End Date</label>
-                                            <input type="date" class="form-control" id="endDate" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="budget" class="form-label">Budget</label>
-                                        <div class="budget-box">
-                                            <i class="fas fa-dollar-sign"></i>
-                                            <input type="text" class="form-control" id="budget" placeholder="0" required>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
+    <div class="projects">
+        @foreach (var project in Model.Projects)
+        {
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="project-client-box">
+                        <img src="~/images/project-logo.svg" alt="Project Logo">
+                        <div class="project-client-text">
+                            <span class="project-title">@project.ProjectName</span>
+                            <span class="client-name">@project.ClientName</span>
+                        </div>
+                    </div>
+                    <div class="options-wrapper">
+                        <button class="options-btn" onclick="toggleOptions('@project.ProjectId')">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <div class="options-menu" id="options-@project.ProjectId">
+                            <button onclick="editProject('@project.ProjectId')" class="edit-btn">
+                                <i class="fa-duotone fa-solid fa-pen" style="--fa-primary-color: #1a1926; --fa-secondary-color: #1a1926; --fa-secondary-opacity: 0.4;"></i>
+                                <span>Edit</span>
+                            </button>
+                            <div class="options-line"></div>
+                            <button onclick="deleteProject('@project.ProjectId')" class="delete-btn">
+                                <i class="fa-duotone fa-solid fa-trash" style="--fa-primary-color: #ff6640; --fa-secondary-color: #ff6640;"></i>
+                                <span>Delete Project</span>
+                            </button>
                         </div>
                     </div>
                 </div>
+                <div class="card-body">
+                    <p class="project-description">@project.Description</p>
+                </div>
             </div>
-
-            <section class="projects-section">
-                <div class="tabs">
-                    <a class="active" href="#">ALL (0)</a>
-                    <a href="#">STARTED (0)</a>
-                    <a href="#">COMPLETED (0)</a>
-                </div>
-                <div class="projects">
-                </div>
-            </section>
-        </section>
+        }
     </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="js/portal-script.js"></script>
-</body>
-</html>
+<!-- Add/Edit Project Modal -->
+<div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" id="projectForm" asp-page-handler="AddProject" novalidate>
+                <input type="hidden" name="isEdit" value="false" id="isEdit" />
+                <input type="hidden" name="projectId" id="projectIdInput" />
+
+                <div class="modal-header">
+                    <h2 class="modal-title" id="projectModalLabel">Add Project</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-project-logo">
+                        <img src="~/images/project-logo.svg" alt="Project Logo">
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ProjectForm.ProjectName"></label>
+                        <input asp-for="ProjectForm.ProjectName" class="form-control">
+                        <span asp-validation-for="ProjectForm.ProjectName"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ProjectForm.ClientName"></label>
+                        <input asp-for="ProjectForm.ClientName" class="form-control">
+                        <span asp-validation-for="ProjectForm.ClientName"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ProjectForm.Description"></label>
+                        <textarea asp-for="ProjectForm.Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="ProjectForm.Description"></span>
+                    </div>
+                    <div class="project-date">
+                        <div class="mb-4">
+                            <label asp-for="ProjectForm.StartDate"></label>
+                            <input asp-for="ProjectForm.StartDate" class="form-control" type="date">
+                            <span asp-validation-for="ProjectForm.StartDate"></span>
+                        </div>
+                        <div class="mb-4">
+                            <label asp-for="ProjectForm.EndDate"></label>
+                            <input asp-for="ProjectForm.EndDate" class="form-control" type="date">
+                            <span asp-validation-for="ProjectForm.EndDate"></span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="ProjectForm.Budget"></label>
+                        <div class="budget-box">
+                            <div class="dollar-icon"><i class="fas fa-dollar-sign"></i></div>
+                            <input asp-for="ProjectForm.Budget" class="form-control">
+                            <span asp-validation-for="ProjectForm.Budget"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="saveProjectBtn">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteProjectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Delete Project</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this project? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" id="projectIdToDelete" name="projectId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/validation.js"></script>
+}

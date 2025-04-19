@@ -6,18 +6,24 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5074",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "false",
+            "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "",
+            "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": ""
+        }
     },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7065;http://localhost:5074",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "false",
+            "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "",
+            "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": ""
+        }
     }
   }
 }

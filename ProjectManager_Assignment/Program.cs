@@ -14,6 +14,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AlphaDB")));
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 {
     options.User.RequireUniqueEmail = true;
@@ -29,6 +37,14 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<DataContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.Always;
+    options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.Always;
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -52,17 +68,17 @@ var app = builder.Build();
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+app.MapRazorPages();
 
 // Redirect root to login or projects based on authentication status
 app.MapGet("/", (HttpContext context) => {
     if (context.User.Identity?.IsAuthenticated ?? false)
     {
-        return Results.Redirect("/Projects/Index");
+        return Results.Redirect("/Project/Index");
     }
     return Results.Redirect("/Account/Login");
 });
