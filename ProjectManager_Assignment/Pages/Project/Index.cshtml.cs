@@ -26,9 +26,6 @@ public class IndexModel(IProjectService projectService, UserManager<UserEntity> 
         EndDate = DateTime.Now.AddDays(30)
     };
 
-    [BindProperty]
-    public string ProjectId { get; set; } = string.Empty;
-
     public string CurrentTab { get; set; } = "all";
     public int AllCount { get; set; }
     public int StartedCount { get; set; }

@@ -5,20 +5,19 @@ using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public class ProjectService(ProjectRepository projectRepository, ClientRepository clientRepository) : IProjectService
+public class ProjectService(ProjectRepository projectRepository, IClientService clientService) : IProjectService
 {
     private readonly ProjectRepository _projectRepository = projectRepository;
-    private readonly ClientRepository _clientRepository = clientRepository;
+    private readonly IClientService _clientService = clientService;
 
     public async Task<ProjectDto> CreateProjectAsync(ProjectDto projectDto, string userId)
     {
         try
         {
-            var client = await _clientRepository.GetClientByNameAsync(projectDto.ClientName);
-            if (client == null)
+            var clientDto = await _clientService.GetClientByNameAsync(projectDto.ClientName);
+            if (clientDto == null)
             {
-                client = new ClientEntity { ClientName = projectDto.ClientName };
-                await _clientRepository.AddClientAsync(client);
+                clientDto = await _clientService.AddClientAsync(projectDto.ClientName);
             }
 
             var project = new ProjectEntity
@@ -28,7 +27,7 @@ public class ProjectService(ProjectRepository projectRepository, ClientRepositor
                 StartDate = projectDto.StartDate,
                 EndDate = projectDto.EndDate,
                 Budget = projectDto.Budget,
-                ClientId = client.Id,
+                ClientId = clientDto.Id,
                 UserId = userId
             };
 
@@ -115,12 +114,11 @@ public class ProjectService(ProjectRepository projectRepository, ClientRepositor
         try
         {
             var project = await _projectRepository.GetProjectByIdAsync(projectDto.ProjectId) ?? throw new Exception("Project not found");
-            var client = await _clientRepository.GetClientByNameAsync(projectDto.ClientName);
+            var clientDto = await _clientService.GetClientByNameAsync(projectDto.ClientName);
 
-            if (client == null)
+            if (clientDto == null)
             {
-                client = new ClientEntity { ClientName = projectDto.ClientName };
-                await _clientRepository.AddClientAsync(client);
+                clientDto = await _clientService.AddClientAsync(projectDto.ClientName);
             }
 
             project.ProjectName = projectDto.ProjectName;
@@ -128,7 +126,7 @@ public class ProjectService(ProjectRepository projectRepository, ClientRepositor
             project.StartDate = projectDto.StartDate;
             project.EndDate = projectDto.EndDate;
             project.Budget = projectDto.Budget;
-            project.ClientId = client.Id;
+            project.ClientId = clientDto.Id;
 
             await _projectRepository.UpdateProjectAsync(project);
         }
